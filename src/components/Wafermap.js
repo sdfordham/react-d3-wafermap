@@ -3,13 +3,20 @@ import d3Wafermap from './d3Wafermap.js';
 
 class Wafermap extends React.Component {
     componentDidMount() {
-        this._chart = d3Wafermap.create(
+        d3Wafermap.create(
             this._rootNode,
             this.props.points,
             this.props.configuration
         );
     }
-        
+
+    componentDidUpdate(){
+        d3Wafermap.update(
+            this._rootNode,
+            this.props.points
+        );
+    }
+
     _setRef(componentNode) {
         this._rootNode = componentNode;
     }
