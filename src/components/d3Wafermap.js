@@ -1,10 +1,8 @@
-import { svg } from 'd3';
-
-var d3 = require('d3');
+var d3 = require("d3");
 var d3Wafermap = {};
 
 d3Wafermap.create = (el, data, configuration) => {
-  var svg = d3.select(el).append('svg')
+  var svg = d3.select(el).append("svg")
     .attr("width", configuration.width)
     .attr("height", configuration.height)
 
