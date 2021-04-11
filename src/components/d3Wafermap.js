@@ -46,6 +46,21 @@ d3Wafermap.update = (el, data) => {
   const inner_c = svg.select("#d3-inner-circ")
     .attr("r", radius);
 
+  function mouseover(d, i) {
+    svg.select("#d3-die")
+    .append("text")
+    .attr("id", "d3-tooltip")
+    .attr("x", radius)
+    .attr("y", radius)
+    .attr("font-size", "2px")
+    .text(i.mouseover);
+  }
+
+  var mouseout = function(d, i) {
+    svg.select("#d3-tooltip")
+      .remove()
+  }
+
   const g = svg.select("#d3-die")
     .selectAll("rect")
     .data(data)
@@ -57,15 +72,9 @@ d3Wafermap.update = (el, data) => {
     .attr("fill", ({color}) => color)
     .attr("stroke", "black")
     .attr("stroke-width", 0.025)
-
-  svg.selectAll("title")
-    .remove()
-
-  svg.selectAll("rect")
-    .data(data)
-    .append("svg:title")
-    .text(({mouseover}) => mouseover);
-
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout);
+  
   svg.call(d3.zoom()
     .extent([[0, 0], [vWidth, vHeight]])
     .scaleExtent([1, 8])
